@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>PURE JAVASCRIPT FILE TO BASE64 || BASE64 STRING TO JSON-COMPATIBLE CONVERTER</title>
+
+<style>
+body{
+
+	background-color:"#000";
+	color:"#0f0";
+}
+
+textarea{
+	height:500px;
+	width:500px;
+}
+
+</style>
+
+<script type='text/javascript'>
+
+function make()
+{
+	var filesSelected = document.getElementById("inputFile").files;
+	if (filesSelected.length > 0)
+	{
+		var file = filesSelected[0];
+
+		var fileReader = new FileReader();
+
+		fileReader.onload = function(fileLoadedEvent) 
+		{
+			var textArea = document.getElementById('base64');
+	
+			textArea.innerHTML = fileLoadedEvent.target.result;
+			
+		};
+
+		fileReader.readAsDataURL(file);
+
+	}
+
+}
+
+
+function Convert() {
+
+var input = document.getElementById('base64').value;
+
+var output = "";
+for (var i = 0; i < input.length; i++) {
+if ((input.charCodeAt(i) == 13) && (input.charCodeAt(i + 1) == 10)) {
+i++;
+output += "<BR>";
+} else {
+	x = input.charAt(i);
+output += x.replace(/[\n\r]/g, '');
+   }
+
+}
+
+   document.getElementById('line').value = output;
+
+
+
+}
+
+
+</script>
+
+</head>
+
+
+
+<body>
+
+
+	<p>Select a File to convert</p>
+	<input id="inputFile" type="file" onchange="make();" />
+	<br>
+	<p>Convert to base64 using the JS as DataURL method:</p><br>
+	<textarea id="base64"  ></textarea><br><br>
+	<button onclick="Convert();">Make it one line for use it in a JSON file</button>
+<br><br><br>
+
+
+
+
+
+<form>
+  <input type=text id="line" name="output" size="50">
+</form>
+
+
+
+
+</body>
+</html>
